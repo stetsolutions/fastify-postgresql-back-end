@@ -14,7 +14,7 @@ Back-end starter using:
 
 Compatible with:
  
-- react-cra-mui-front-end
+- [react-cra-mui-front-end](https://github.com/stetsolutions/react-cra-mui-front-end)
 
 ## Install
 
