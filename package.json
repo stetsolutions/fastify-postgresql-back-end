@@ -1,5 +1,5 @@
 {
-  "name": "fastify-3-postgresql-back-end",
+  "name": "fastify-postgresql-back-end",
   "version": "1.0.0",
   "description": "",
   "main": "app.ts",
