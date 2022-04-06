@@ -22,7 +22,8 @@ Compatible with:
 
 ## Configure
 
-Add environment file (i.e. `.env`) using template (i.e. `.env.template`).
+- Add environment file (i.e. `.env`) using template (i.e. [`.env.template`](https://github.com/stetsolutions/fastify-postgresql-back-end/blob/main/.env.template)).
+- [Initialize database](https://github.com/stetsolutions/fastify-postgresql-back-end/blob/main/src/sql/init.sql) (if not running via Docker). 
 
 ## Test
 
