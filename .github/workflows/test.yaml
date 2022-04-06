@@ -1,0 +1,55 @@
+name: Test
+
+on:
+  push:
+    branches: [develop, main]
+  pull_request:
+    branches: [develop, main]
+
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:14
+        env:
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Create .env
+        run: |
+          cat << EOF > .env
+          GMAIL_CLIENT_SECRET=${{ secrets.GMAIL_CLIENT_SECRET }}
+          GMAIL_CLIENT_ID=${{ secrets.GMAIL_CLIENT_ID }}
+          GMAIL_REFRESH_TOKEN=${{ secrets.GMAIL_REFRESH_TOKEN }}
+          GMAIL_USER=${{ secrets.GMAIL_USER }}
+          POSTGRES_DB=postgres
+          POSTGRES_HOST=localhost
+          POSTGRES_PASSWORD=postgres
+          POSTGRES_PORT=5432
+          POSTGRES_USER=postgres
+          SESSION_COOKIE_NAME=${{ secrets.SESSION_COOKIE_NAME }}
+          SESSION_KEY=${{ secrets.SESSION_KEY }}
+          TESTING_DB_PREFIX=base_test
+          TESTING_PASSWORD=foobarbazqux
+          TESTING_GMAIL_USER=${{ secrets.TESTING_GMAIL_USER }}
+          EOF
+
+      - run: npm install
+      - run: npm test

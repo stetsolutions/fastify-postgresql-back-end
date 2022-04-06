@@ -1,0 +1,12 @@
+p, *, /api/v1/auth, DELETE|PATCH|POST
+p, user, /api/v1/auth/resend, POST
+p, *, /api/v1/auth/reset, POST
+p, *, /api/v1/auth/sign-in, POST
+p, *, /api/v1/auth/sign-out, DELETE
+
+p, admin, /api/v1/users, GET|POST
+p, admin, /api/v1/users/*, DELETE|PATCH
+p, user, /api/v1/users/*/email, PATCH
+p, user, /api/v1/users/*/password, PATCH
+p, user, /api/v1/users/*/profile, PATCH
+g, admin, user

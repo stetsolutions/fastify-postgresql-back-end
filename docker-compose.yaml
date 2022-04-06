@@ -1,0 +1,31 @@
+version: '3.8'
+services:
+  fastify:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      target: dev
+    container_name: fastify
+    depends_on:
+      - postgres
+    env_file: 
+      - .env
+    environment:
+      - POSTGRES_HOST=postgres
+    image: localhost/fastify-3-postgresql-back-end
+    ports:
+      - 3001:3001
+    restart: always
+  postgres: 
+    container_name: postgres
+    env_file: 
+      - .env
+    image: postgres:14-alpine
+    ports:
+      - 5433:5432
+    restart: always
+    volumes:
+      - postgres:/var/lib/postgresql/data
+      - ./src/sql/init.sql:/docker-entrypoint-initdb.d/init.sql
+volumes: 
+  postgres:

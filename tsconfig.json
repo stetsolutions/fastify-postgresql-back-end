@@ -1,0 +1,9 @@
+{
+  "extends": "fastify-tsconfig/tsconfig.json",
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "outDir": "dist",
+    "sourceMap": true
+  },
+  "include": ["src/**/*.ts", "src/server.js", "src/plugins/cors.ts"]
+}
